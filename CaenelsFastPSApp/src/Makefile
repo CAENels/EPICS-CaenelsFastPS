@@ -16,10 +16,13 @@ DBD += CaenelsFastPS.dbd
 CaenelsFastPS_DBD += base.dbd
 
 # Include dbd files from all support applications:
-#CaenelsFastPS_DBD += xxx.dbd
+CaenelsFastPS_DBD += asyn.dbd
+CaenelsFastPS_DBD += drvAsynIPPort.dbd
+CaenelsFastPS_DBD += stream.dbd
 
 # Add all the support libraries needed by this IOC
-#CaenelsFastPS_LIBS += xxx
+CaenelsFastPS_LIBS += asyn
+CaenelsFastPS_LIBS += stream
 
 # CaenelsFastPS_registerRecordDeviceDriver.cpp derives from CaenelsFastPS.dbd
 CaenelsFastPS_SRCS += CaenelsFastPS_registerRecordDeviceDriver.cpp

@@ -1,0 +1,110 @@
+
+record (stringin, "$(P)$(R)Model")
+{
+    field(DESC, "Model")
+    field(DTYP, "stream")
+    field(INP,  "@fastps.proto getModel L0")
+    field(PINI, "YES")
+}
+
+record (ai, "$(P)$(R)LimitMaxIV")
+{
+    field(DESC, "Model")
+    field(DTYP, "stream")
+    field(INP,  "@fastps.proto getLimitCurrentVoltage L0")
+    field(PINI, "YES")
+}
+
+record (stringin, "$(P)$(R)Version")
+{
+    field(DESC, "Model")
+    field(DTYP, "stream")
+    field(INP,  "@fastps.proto getVersion L0")
+    field(PINI, "YES")
+}
+
+################################################################################
+record(bo, "$(P)$(R)Enable")
+{
+    field(DESC, "Turn supply off/on")
+    field(DTYP, "stream")
+    field(OUT,  "@fastps.proto setEnable L0")
+    field(ZNAM, "Off")
+    field(ONAM, "On")
+}
+
+record(bo, "$(P)$(R)RegulationMode")
+{
+    field(DESC, "Selects between voltage/current reg")
+    field(DTYP, "stream")
+    field(OUT,  "@fastps.proto setRegulationMode L0")
+    field(ZNAM, "V")
+    field(ONAM, "I")
+}
+
+record(ao, "$(P)$(R)Voltage")
+{
+    field(DESC, "Voltage control (in V reg mode)")
+    field(DTYP, "stream")
+    field(OUT,  "@fastps.proto setVoltage L0")
+}
+
+record(ao, "$(P)$(R)Current")
+{
+    field(DESC, "Current control (in V reg mode)")
+    field(DTYP, "stream")
+    field(OUT,  "@fastps.proto setCurrent L0")
+}
+
+################################################################################
+record(bi, "$(P)$(R)ReadbackPoll_")
+{
+    field(DESC, "Head of readback chain")
+    field(FLNK, "$(P)$(R)OutputVoltage")
+    field(PINI, "YES")
+    field(SCAN, "1 second")
+}
+
+record(ai, "$(P)$(R)OutputVoltage")
+{
+    field(DESC, "Output voltage")
+    field(DTYP, "stream")
+    field(EGU,  "V")
+    field(FLNK, "$(P)$(R)OutputCurrent")
+    field(INP,  "@fastps.proto getOutputVoltage L0")
+}
+
+record(ai, "$(P)$(R)OutputCurrent")
+{
+    field(DESC, "Output current")
+    field(DTYP, "stream")
+    field(EGU,  "A")
+    field(FLNK, "$(P)$(R)GroundCurrent")
+    field(INP,  "@fastps.proto getOutputCurrent L0")
+}
+
+record(ai, "$(P)$(R)GroundCurrent")
+{
+    field(DESC, "Ground current")
+    field(DTYP, "stream")
+    field(EGU,  "A")
+    field(FLNK, "$(P)$(R)DCLinkVoltage")
+    field(INP,  "@fastps.proto getGroundCurrent L0")
+}
+
+record(ai, "$(P)$(R)DCLinkVoltage")
+{
+    field(DESC, "DC Link voltage")
+    field(DTYP, "stream")
+    field(EGU,  "V")
+    field(FLNK, "$(P)$(R)HeatsinkTemp")
+    field(INP,  "@fastps.proto getDCLinkVoltage L0")
+}
+
+record(ai, "$(P)$(R)HeatsinkTemp")
+{
+    field(DESC, "Heatsink temperature")
+    field(DTYP, "stream")
+    field(EGU,  "deg C")
+    field(INP,  "@fastps.proto getTemperature L0")
+}

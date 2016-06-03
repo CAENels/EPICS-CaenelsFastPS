@@ -1,0 +1,80 @@
+
+OutTerminator = CR;
+InTerminator = CR LF;
+
+getModel {
+    out "VER";
+    in "#VER:%s\_%*s";
+    @init  {
+        out "VER";
+        in "#VER:%s\_%*s"
+    }
+}
+
+# TODO: add parsing for 10006 model
+getLimitCurrentVoltage {
+    out "VER";
+    in "#VER:%*s\_%d%*s";
+    @init {
+        out "VER";
+        in "#VER:%*s\_%d%*s";
+    };
+}
+
+getVersion {
+    out "VER";
+    in "#VER:%*s\_%*[^:]:%s";
+    @init {
+        out "VER";
+        in "#VER:%*s\_%*[^:]:%s";
+    };
+}
+
+################################################################################
+
+setEnable {
+    out "%{MOFF|MON}";
+    in "#AK";
+}
+
+setRegulationMode {
+    out "LOOP:%{V|I}";
+    in "#AK";
+}
+
+setVoltage {
+    out "MWV:%f";
+    in "#AK";
+}
+
+setCurrent {
+    out "MWI:%f";
+    in "#AK";
+}
+
+################################################################################
+
+getOutputVoltage {
+    out "MRV";
+    in "#MRV:%f";
+}
+
+getOutputCurrent {
+    out "MRI";
+    in "#MRI:%f";
+}
+
+getGroundCurrent {
+    out "MGC";
+    in "#MGC:%f";
+}
+
+getDCLinkVoltage {
+    out "MRP";
+    in "#MRP:%f";
+}
+
+getTemperature {
+    out "MRT";
+    in "#MRT:%f";
+}
