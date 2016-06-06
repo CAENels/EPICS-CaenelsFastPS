@@ -106,5 +106,21 @@ record(ai, "$(P)$(R)HeatsinkTemp")
     field(DESC, "Heatsink temperature")
     field(DTYP, "stream")
     field(EGU,  "deg C")
+    field(FLNK, "$(P)$(R)StatusMSB")
     field(INP,  "@fastps.proto getTemperature L0")
+}
+
+record(mbbiDirect, "$(P)$(R)StatusMSB")
+{
+    field(DESC, "Status MSB")
+    field(DTYP, "stream")
+    field(FLNK, "$(P)$(R)StatusLSB")
+    field(INP,  "@fastps.proto getStatusMSB L0")
+}
+
+record(mbbiDirect, "$(P)$(R)StatusLSB")
+{
+    field(DESC, "Status LSB")
+    field(DTYP, "stream")
+    field(INP,  "@fastps.proto getStatusLSB L0")
 }

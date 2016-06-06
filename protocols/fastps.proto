@@ -78,3 +78,13 @@ getTemperature {
     out "MRT";
     in "#MRT:%f";
 }
+
+getStatusMSB {
+    out "MST";
+    in "#MST:%4x%*4x";
+}
+
+getStatusLSB {
+    out "MST";
+    in "#MST:%*4x%4x";
+}
