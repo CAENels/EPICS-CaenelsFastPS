@@ -12,12 +12,21 @@ getModel {
 }
 
 # TODO: add parsing for 10006 model
-getLimitCurrentVoltage {
+getLimitCurrent {
     out "VER";
-    in "#VER:%*s\_%d%*s";
+    in "#VER:%*s\_%02d%*s";
     @init {
         out "VER";
-        in "#VER:%*s\_%d%*s";
+        in "#VER:%*s\_%(\$1Current.HOPR)02d%*s";
+    };
+}
+
+getLimitVoltage {
+    out "VER";
+    in "#VER:%*s\_%*02d%02d%*s";
+    @init {
+        out "VER";
+        in "#VER:%*s\_%*02d%(\$1Voltage.HOPR)02d%*s";
     };
 }
 

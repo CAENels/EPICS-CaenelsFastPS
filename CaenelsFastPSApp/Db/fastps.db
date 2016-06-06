@@ -7,13 +7,76 @@ record (stringin, "$(P)$(R)Model")
     field(PINI, "YES")
 }
 
-record (ai, "$(P)$(R)LimitMaxIV")
+record (ai, "$(P)$(R)LimitMaxI")
 {
-    field(DESC, "Model")
+    field(DESC, "High limit for Current")
     field(DTYP, "stream")
-    field(INP,  "@fastps.proto getLimitCurrentVoltage L0")
+    field(INP,  "@fastps.proto getLimitCurrent($(P)$(R)) L0")
     field(PINI, "YES")
+    field(FLNK, "$(P)$(R)LimitMaxIneg_")
 }
+
+record (calcout, "$(P)$(R)LimitMaxIneg_")
+{
+    field(DESC, "Low limit for Current")
+    field(INPA, "$(P)$(R)LimitMaxI")
+    field(CALC,  "A*(-1)")
+    field(OUT,  "$(P)$(R)Current.LOPR")
+    field(FLNK, "$(P)$(R)_OutCurr_max")
+}
+
+record (calcout, "$(P)$(R)_OutCurr_max")
+{
+    field(DESC, "High limit for OutputCurrent")
+    field(INPA, "$(P)$(R)LimitMaxI")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)OutputCurrent.HOPR")
+    field(FLNK, "$(P)$(R)_OutCurr_min")
+}
+
+record (calcout, "$(P)$(R)_OutCurr_min")
+{
+    field(DESC, "Low limit for OutputCurrent")
+    field(INPA, "$(P)$(R)LimitMaxI")
+    field(CALC,  "A*(-1)")
+    field(OUT,  "$(P)$(R)OutputCurrent.LOPR")
+}
+
+record (ai, "$(P)$(R)LimitMaxV")
+{
+    field(DESC, "High limit for Voltage")
+    field(DTYP, "stream")
+    field(INP,  "@fastps.proto getLimitVoltage($(P)$(R)) L0")
+    field(PINI, "YES")
+    field(FLNK, "$(P)$(R)LimitMaxVneg_")
+}
+
+record (calcout, "$(P)$(R)LimitMaxVneg_")
+{
+    field(DESC, "Low limit for Voltage")
+    field(INPA, "$(P)$(R)LimitMaxV")
+    field(CALC,  "A*(-1)")
+    field(OUT,  "$(P)$(R)Voltage.LOPR")
+    field(FLNK, "$(P)$(R)_OutVolt_max")
+}
+
+record (calcout, "$(P)$(R)_OutVolt_max")
+{
+    field(DESC, "High limit for OutputVoltage")
+    field(INPA, "$(P)$(R)LimitMaxV")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)OutputVoltage.HOPR")
+    field(FLNK, "$(P)$(R)_OutVolt_min")
+}
+
+record (calcout, "$(P)$(R)_OutVolt_min")
+{
+    field(DESC, "Low limit for OutputVoltage")
+    field(INPA, "$(P)$(R)LimitMaxV")
+    field(CALC,  "A*(-1)")
+    field(OUT,  "$(P)$(R)OutputVoltage.LOPR")
+}
+
 
 record (stringin, "$(P)$(R)Version")
 {
