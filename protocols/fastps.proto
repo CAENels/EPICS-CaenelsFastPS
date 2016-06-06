@@ -105,4 +105,8 @@ getStatusMSB {
 getStatusLSB {
     out "MST";
     in "#MST:%*4x%4x";
+    @init {
+        out "MST";
+        in "#MST:%*4x%4x";
+    }
 }

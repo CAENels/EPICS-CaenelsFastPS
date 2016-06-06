@@ -11,6 +11,7 @@ record (ai, "$(P)$(R)LimitMaxI")
 {
     field(DESC, "High limit for Current")
     field(DTYP, "stream")
+    field(EGU,  "A")
     field(INP,  "@fastps.proto getLimitCurrent($(P)$(R)) L0")
     field(PINI, "YES")
     field(FLNK, "$(P)$(R)LimitMaxIneg_")
@@ -46,6 +47,7 @@ record (ai, "$(P)$(R)LimitMaxV")
 {
     field(DESC, "High limit for Voltage")
     field(DTYP, "stream")
+    field(EGU,  "V")
     field(INP,  "@fastps.proto getLimitVoltage($(P)$(R)) L0")
     field(PINI, "YES")
     field(FLNK, "$(P)$(R)LimitMaxVneg_")
@@ -85,8 +87,24 @@ record (stringin, "$(P)$(R)Version")
     field(INP,  "@fastps.proto getVersion L0")
     field(PINI, "YES")
 }
-
 ################################################################################
+
+record(mbbiDirect, "$(P)$(R)_EnableInit")
+{
+    field(DESC, "Initialization for Enable")
+    field(PINI, "YES")
+    field(INP,  "@fastps.proto getStatusLSB L0")
+    field(FLNK, "$(P)$(R)_EnableInitCalc")
+}
+
+record(calcout, "$(P)$(R)_EnableInitCalc")
+{
+    field(DESC, "Initialization for Enable")
+    field(INPA, "$(P)$(R)StatusLSB")
+    field(CALC, "A & 0x1")
+    field(OUT,  "$(P)$(R)Enable.VAL")
+}
+
 record(bo, "$(P)$(R)Enable")
 {
     field(DESC, "Turn supply off/on")
@@ -109,6 +127,7 @@ record(ao, "$(P)$(R)Voltage")
 {
     field(DESC, "Voltage control (in V reg mode)")
     field(DTYP, "stream")
+    field(EGU,  "V")
     field(OUT,  "@fastps.proto setVoltage L0")
     field(PREC, "5")
 }
@@ -117,6 +136,7 @@ record(ao, "$(P)$(R)Current")
 {
     field(DESC, "Current control (in V reg mode)")
     field(DTYP, "stream")
+    field(EGU,  "A")
     field(OUT,  "@fastps.proto setCurrent L0")
     field(PREC, "5")
 }
