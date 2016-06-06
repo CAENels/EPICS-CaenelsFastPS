@@ -47,6 +47,7 @@ record(ao, "$(P)$(R)Voltage")
     field(DESC, "Voltage control (in V reg mode)")
     field(DTYP, "stream")
     field(OUT,  "@fastps.proto setVoltage L0")
+    field(PREC, "5")
 }
 
 record(ao, "$(P)$(R)Current")
@@ -54,6 +55,14 @@ record(ao, "$(P)$(R)Current")
     field(DESC, "Current control (in V reg mode)")
     field(DTYP, "stream")
     field(OUT,  "@fastps.proto setCurrent L0")
+    field(PREC, "5")
+}
+
+record(bo, "$(P)$(R)StatusReset")
+{
+    field(DESC, "Reset status register/clear faults")
+    field(DTYP, "stream")
+    field(OUT,  "@fastps.proto resetStatus L0")
 }
 
 ################################################################################
@@ -62,6 +71,7 @@ record(bi, "$(P)$(R)ReadbackPoll_")
     field(DESC, "Head of readback chain")
     field(FLNK, "$(P)$(R)OutputVoltage")
     field(PINI, "YES")
+    field(INP,  "0")
     field(SCAN, "1 second")
 }
 
@@ -72,6 +82,7 @@ record(ai, "$(P)$(R)OutputVoltage")
     field(EGU,  "V")
     field(FLNK, "$(P)$(R)OutputCurrent")
     field(INP,  "@fastps.proto getOutputVoltage L0")
+    field(PREC, "5")
 }
 
 record(ai, "$(P)$(R)OutputCurrent")
@@ -81,6 +92,7 @@ record(ai, "$(P)$(R)OutputCurrent")
     field(EGU,  "A")
     field(FLNK, "$(P)$(R)GroundCurrent")
     field(INP,  "@fastps.proto getOutputCurrent L0")
+    field(PREC, "5")
 }
 
 record(ai, "$(P)$(R)GroundCurrent")
@@ -90,6 +102,7 @@ record(ai, "$(P)$(R)GroundCurrent")
     field(EGU,  "A")
     field(FLNK, "$(P)$(R)DCLinkVoltage")
     field(INP,  "@fastps.proto getGroundCurrent L0")
+    field(PREC, "3")
 }
 
 record(ai, "$(P)$(R)DCLinkVoltage")
@@ -99,6 +112,7 @@ record(ai, "$(P)$(R)DCLinkVoltage")
     field(EGU,  "V")
     field(FLNK, "$(P)$(R)HeatsinkTemp")
     field(INP,  "@fastps.proto getDCLinkVoltage L0")
+    field(PREC, "2")
 }
 
 record(ai, "$(P)$(R)HeatsinkTemp")
@@ -108,6 +122,7 @@ record(ai, "$(P)$(R)HeatsinkTemp")
     field(EGU,  "deg C")
     field(FLNK, "$(P)$(R)StatusMSB")
     field(INP,  "@fastps.proto getTemperature L0")
+    field(PREC, "2")
 }
 
 record(mbbiDirect, "$(P)$(R)StatusMSB")

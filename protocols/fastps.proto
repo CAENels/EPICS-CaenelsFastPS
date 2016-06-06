@@ -40,6 +40,10 @@ setEnable {
 setRegulationMode {
     out "LOOP:%{V|I}";
     in "#AK";
+    @init {
+        out "LOOP:?";
+        in "#LOOP:%{V|I}";
+    };
 }
 
 setVoltage {
@@ -49,6 +53,11 @@ setVoltage {
 
 setCurrent {
     out "MWI:%f";
+    in "#AK";
+}
+
+resetStatus {
+    out "MRESET";
     in "#AK";
 }
 

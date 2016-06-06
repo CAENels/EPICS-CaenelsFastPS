@@ -6,7 +6,7 @@
   <show_grid>true</show_grid>
   <auto_zoom_to_fit_all>false</auto_zoom_to_fit_all>
   <scripts />
-  <height>300</height>
+  <height>800</height>
   <macros>
     <include_parent_macros>true</include_parent_macros>
   </macros>
@@ -21,7 +21,7 @@
   <background_color>
     <color red="240" green="240" blue="240" />
   </background_color>
-  <width>300</width>
+  <width>500</width>
   <x>-1</x>
   <name></name>
   <grid_space>6</grid_space>
@@ -75,10 +75,10 @@ $(pv_value)</tooltip>
     <background_color>
       <color red="240" green="240" blue="240" />
     </background_color>
-    <width>229</width>
-    <x>36</x>
+    <width>250</width>
+    <x>125</x>
     <name>Action Button</name>
-    <y>42</y>
+    <y>54</y>
     <style>0</style>
     <foreground_color>
       <color red="0" green="0" blue="0" />
