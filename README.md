@@ -15,3 +15,18 @@ This is an EPICS IOC for CAENels power supplies:
 Some parts of this IOC are inspired by **Caen A36xx EPICS Device Support** by
 Lawrence Berkeley National Laboratory, Accelerator Technology Group,
 Engineering Division.
+
+
+Required modules
+================
+
+| Module | Link |
+| --- | --- |
+| asyn | https://github.com/epics-modules/asyn |
+| stream | https://github.com/epics-modules/stream |
+
+
+Screen for Control System Studio
+================================
+
+![Screen for CSS](Documentation/fastps_css_screen.png)
