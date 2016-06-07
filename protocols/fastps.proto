@@ -55,13 +55,15 @@ setRegulationMode {
     };
 }
 
+# the commands are MWV (go to setpt without ramp) and MWVR (ramp)
 setVoltage {
-    out "MWV:%f";
+    out "MWV%(\$1RampEnable){|R}:%f";
     in "#AK";
 }
 
+# the commands are MWI (go to setpt without ramp) and MWIR (ramp)
 setCurrent {
-    out "MWI:%f";
+    out "MWI%(\$1RampEnable){|R}:%f";
     in "#AK";
 }
 

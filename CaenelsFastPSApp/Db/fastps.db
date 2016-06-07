@@ -128,7 +128,7 @@ record(ao, "$(P)$(R)Voltage")
     field(DESC, "Voltage control (in V reg mode)")
     field(DTYP, "stream")
     field(EGU,  "V")
-    field(OUT,  "@fastps.proto setVoltage L0")
+    field(OUT,  "@fastps.proto setVoltage($(P)$(R)) L0")
     field(PREC, "5")
 }
 
@@ -137,7 +137,7 @@ record(ao, "$(P)$(R)Current")
     field(DESC, "Current control (in V reg mode)")
     field(DTYP, "stream")
     field(EGU,  "A")
-    field(OUT,  "@fastps.proto setCurrent L0")
+    field(OUT,  "@fastps.proto setCurrent($(P)$(R)) L0")
     field(PREC, "5")
 }
 
@@ -146,6 +146,15 @@ record(bo, "$(P)$(R)StatusReset")
     field(DESC, "Reset status register/clear faults")
     field(DTYP, "stream")
     field(OUT,  "@fastps.proto resetStatus L0")
+}
+
+record(bo, "$(P)$(R)RampEnable")
+{
+    field(DESC, "Enables/disables ramping to setpoint")
+    field(ZNAM, "Off")
+    field(ONAM, "On")
+    field(DOL,  "0")
+    field(PINI, "YES")
 }
 
 ################################################################################
