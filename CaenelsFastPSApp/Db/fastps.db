@@ -112,6 +112,9 @@ record(bo, "$(P)$(R)Enable")
     field(OUT,  "@fastps.proto setEnable L0")
     field(ZNAM, "Off")
     field(ONAM, "On")
+    # the field gets initialized from status, clear UDF
+    field(STAT, "NO_ALARM")
+    field(SEVR, "NO_ALARM")
 }
 
 record(bo, "$(P)$(R)RegulationMode")
