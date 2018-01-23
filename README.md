@@ -10,7 +10,7 @@ This is an EPICS IOC for CAENels power supplies:
   * [FAST-PS](http://www.caenels.com/products/fast-ps/),
   * [FAST-PS-M](http://www.caenels.com/products/fast-ps-m/),
   * [FAST-PS1K5](http://www.caenels.com/products/fast-ps-1k5/),
-  * [NGPS] (http://www.caenels.com/products/ngps/)
+  * [NGPS](http://www.caenels.com/products/ngps/)
 
 Some parts of this IOC are inspired by **Caen A36xx EPICS Device Support** by
 Lawrence Berkeley National Laboratory, Accelerator Technology Group,
