@@ -1,94 +1,4 @@
 
-record (stringin, "$(P)$(R)Model")
-{
-    field(DESC, "Model")
-    field(DTYP, "stream")
-    field(INP,  "@fastps.proto getModel L0")
-    field(PINI, "YES")
-}
-
-record (ai, "$(P)$(R)LimitMaxI")
-{
-    field(DESC, "High limit for Current")
-    field(DTYP, "stream")
-    field(EGU,  "A")
-    field(INP,  "@fastps.proto getLimitCurrent($(P)$(R)) L0")
-    field(PINI, "YES")
-    field(FLNK, "$(P)$(R)LimitMaxIneg_")
-}
-
-record (calcout, "$(P)$(R)LimitMaxIneg_")
-{
-    field(DESC, "Low limit for Current")
-    field(INPA, "$(P)$(R)LimitMaxI")
-    field(CALC,  "A*(-1)")
-    field(OUT,  "$(P)$(R)Current.LOPR")
-    field(FLNK, "$(P)$(R)_OutCurr_max")
-}
-
-record (calcout, "$(P)$(R)_OutCurr_max")
-{
-    field(DESC, "High limit for OutputCurrent")
-    field(INPA, "$(P)$(R)LimitMaxI")
-    field(CALC,  "A")
-    field(OUT,  "$(P)$(R)OutputCurrent.HOPR")
-    field(FLNK, "$(P)$(R)_OutCurr_min")
-}
-
-record (calcout, "$(P)$(R)_OutCurr_min")
-{
-    field(DESC, "Low limit for OutputCurrent")
-    field(INPA, "$(P)$(R)LimitMaxI")
-    field(CALC,  "A*(-1)")
-    field(OUT,  "$(P)$(R)OutputCurrent.LOPR")
-}
-
-record (ai, "$(P)$(R)LimitMaxV")
-{
-    field(DESC, "High limit for Voltage")
-    field(DTYP, "stream")
-    field(EGU,  "V")
-    field(INP,  "@fastps.proto getLimitVoltage($(P)$(R)) L0")
-    field(PINI, "YES")
-    field(FLNK, "$(P)$(R)LimitMaxVneg_")
-}
-
-record (calcout, "$(P)$(R)LimitMaxVneg_")
-{
-    field(DESC, "Low limit for Voltage")
-    field(INPA, "$(P)$(R)LimitMaxV")
-    field(CALC,  "A*(-1)")
-    field(OUT,  "$(P)$(R)Voltage.LOPR")
-    field(FLNK, "$(P)$(R)_OutVolt_max")
-}
-
-record (calcout, "$(P)$(R)_OutVolt_max")
-{
-    field(DESC, "High limit for OutputVoltage")
-    field(INPA, "$(P)$(R)LimitMaxV")
-    field(CALC,  "A")
-    field(OUT,  "$(P)$(R)OutputVoltage.HOPR")
-    field(FLNK, "$(P)$(R)_OutVolt_min")
-}
-
-record (calcout, "$(P)$(R)_OutVolt_min")
-{
-    field(DESC, "Low limit for OutputVoltage")
-    field(INPA, "$(P)$(R)LimitMaxV")
-    field(CALC,  "A*(-1)")
-    field(OUT,  "$(P)$(R)OutputVoltage.LOPR")
-}
-
-
-record (stringin, "$(P)$(R)Version")
-{
-    field(DESC, "Model")
-    field(DTYP, "stream")
-    field(INP,  "@fastps.proto getVersion L0")
-    field(PINI, "YES")
-}
-################################################################################
-
 record(mbbiDirect, "$(P)$(R)_EnableInit")
 {
     field(DESC, "Initialization for Enable")
@@ -232,5 +142,140 @@ record(mbbiDirect, "$(P)$(R)StatusLSB")
 {
     field(DESC, "Status LSB")
     field(DTYP, "stream")
+    field(FLNK, "$(P)$(R)Limits")
     field(INP,  "@fastps.proto getStatusLSB L0")
+}
+
+record (aai, "$(P)$(R)Limits")
+{
+    field(DESC, "Limits")
+    field(DTYP, "stream")
+
+    field(FTVL, "FLOAT")
+    field(NELM, "4")
+    field(INP,  "@fastps.proto getLimits L0")
+    field(FLNK, "$(P)$(R)LimitMinV")
+}
+
+record (ai, "$(P)$(R)LimitMinV")
+{
+    field(DESC, "Low limit of voltage")
+    field(DTYP, "stream")
+    field(EGU,  "V")
+    field(FLNK, "$(P)$(R)LimitMaxV")
+    field(INP, "@fastps.proto getMinV L0")
+}
+
+record (ai, "$(P)$(R)LimitMaxV")
+{
+    field(DESC, "High limit of voltage")
+    field(DTYP, "stream")
+    field(EGU,  "V")
+    field(FLNK, "$(P)$(R)LimitMinI")
+    field(INP, "@fastps.proto getMaxV L0")
+}
+
+record (ai, "$(P)$(R)LimitMinI")
+{
+    field(DESC, "Low limit of current")
+    field(DTYP, "stream")
+    field(EGU,  "A")
+    field(FLNK, "$(P)$(R)LimitMaxI")
+    field(INP, "@fastps.proto getMinI L0")
+}
+
+record (ai, "$(P)$(R)LimitMaxI")
+{
+    field(DESC, "High limit of current")
+    field(DTYP, "stream")
+    field(EGU,  "A")
+    field(FLNK, "$(P)$(R)LimitMinV_")
+    field(INP, "@fastps.proto getMaxI L0")
+}
+
+record (calcout, "$(P)$(R)LimitMinV_")
+{
+    field(DESC, "Low limit for Voltage")
+    field(INPA, "$(P)$(R)LimitMinV")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)Voltage.LOPR")
+    field(FLNK, "$(P)$(R)LimitMinVOutput_")
+}
+
+record (calcout, "$(P)$(R)LimitMinVOutput_")
+{
+    field(DESC, "Low limit for output Voltage")
+    field(INPA, "$(P)$(R)LimitMinV")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)OutputVoltage.LOPR")
+    field(FLNK, "$(P)$(R)LimitMaxV_")
+}
+
+record (calcout, "$(P)$(R)LimitMaxV_")
+{
+    field(DESC, "High limit for Voltage")
+    field(INPA, "$(P)$(R)LimitMaxV")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)Voltage.HOPR")
+    field(FLNK, "$(P)$(R)LimitMaxVOutput_")
+}
+
+record (calcout, "$(P)$(R)LimitMaxVOutput_")
+{
+    field(DESC, "High limit for output Voltage")
+    field(INPA, "$(P)$(R)LimitMaxV")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)OutputVoltage.HOPR")
+    field(FLNK, "$(P)$(R)LimitMinI_")
+}
+
+record (calcout, "$(P)$(R)LimitMinI_")
+{
+    field(DESC, "Low limit for Current")
+    field(INPA, "$(P)$(R)LimitMinI")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)Current.LOPR")
+    field(FLNK, "$(P)$(R)LimitMinIOutput_")
+}
+
+record (calcout, "$(P)$(R)LimitMinIOutput_")
+{
+    field(DESC, "Low limit for output Current")
+    field(INPA, "$(P)$(R)LimitMinI")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)OutputCurrent.LOPR")
+    field(FLNK, "$(P)$(R)LimitMaxI_")
+}
+
+record (calcout, "$(P)$(R)LimitMaxI_")
+{
+    field(DESC, "High limit for Current")
+    field(INPA, "$(P)$(R)LimitMaxI")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)Current.HOPR")
+    field(FLNK, "$(P)$(R)LimitMaxIOutput_")
+}
+
+record (calcout, "$(P)$(R)LimitMaxIOutput_")
+{
+    field(DESC, "High limit for output Current")
+    field(INPA, "$(P)$(R)LimitMaxI")
+    field(CALC,  "A")
+    field(OUT,  "$(P)$(R)OutputCurrent.HOPR")
+    field(FLNK, "$(P)$(R)Model")
+}
+
+record (stringin, "$(P)$(R)Model")
+{
+    field(DESC, "Model")
+    field(DTYP, "stream")
+    field(INP,  "@fastps.proto getModel L0")
+    field(FLNK, "$(P)$(R)Version")
+}
+
+record (stringin, "$(P)$(R)Version")
+{
+    field(DESC, "Version")
+    field(DTYP, "stream")
+    field(INP,  "@fastps.proto getVersion L0")
 }

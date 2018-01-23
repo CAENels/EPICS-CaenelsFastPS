@@ -1,7 +1,8 @@
-#!../../bin/linux-x86_64/CaenelsFastPS
+#!../../bin/EPICS
 
 < envPaths
 
+epicsEnvSet ("PATH", "${PATH}:${TOP}/bin")
 epicsEnvSet ("STREAM_PROTOCOL_PATH", ".:../../protocols")
 epicsEnvSet("P","$(R=caenels:)")
 epicsEnvSet("R","$(R=fastps:)")
@@ -13,7 +14,7 @@ dbLoadDatabase("dbd/CaenelsFastPS.dbd",0,0)
 CaenelsFastPS_registerRecordDeviceDriver(pdbbase)
 
 ## Configure device
-drvAsynIPPortConfigure("L0","192.168.0.10:10001",0,0,0)
+drvAsynIPPortConfigure("L0","localhost:10001",0,0,0)
 
 ## Load record instances
 dbLoadRecords("db/fastps.db", "P=$(P),R=$(R)")

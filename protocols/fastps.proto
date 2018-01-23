@@ -11,23 +11,37 @@ getModel {
     }
 }
 
-# TODO: add parsing for 10006 model
-getLimitCurrent {
-    out "VER";
-    in "#VER:%*s\_%02d%*s";
+getLimits {
+    separator=":";
+
+    out "MLIMITS:?";
+    in "#MLIMITS:%f";
+
     @init {
-        out "VER";
-        in "#VER:%*s\_%(\$1Current.HOPR)02d%*s";
-    };
+        out "MLIMITS:?";
+        in "#MLIMITS:%f";
+        # in "#MLIMITS:%(\$1Voltage.LOPR)f%(\$2Voltage.HOPR)f%(\$3Current.LOPR)f%(\$4Current.HOPR)f";
+    }
 }
 
-getLimitVoltage {
-    out "VER";
-    in "#VER:%*s\_%*02d%02d%*s";
-    @init {
-        out "VER";
-        in "#VER:%*s\_%*02d%(\$1Voltage.HOPR)02d%*s";
-    };
+getMinV {
+    out "MLIMITS:?";
+    in "#MLIMITS:%f:%*s";
+}
+
+getMaxV {
+    out "MLIMITS:?";
+    in "#MLIMITS:%*f:%f%*s";
+}
+
+getMinI {
+    out "MLIMITS:?";
+    in "#MLIMITS:%*f:%*f:%f%*s";
+}
+
+getMaxI {
+    out "MLIMITS:?";
+    in "#MLIMITS:%*f:%*f:%*f:%f";
 }
 
 getVersion {
