@@ -33,7 +33,7 @@ Required modules
 
 Required firmware
 ================
-Release 1.3.x.
+Release >= 1.3.x.
 
 
 Screen for Control System Studio
