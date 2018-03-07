@@ -31,6 +31,11 @@ Required modules
 | stream | https://github.com/epics-modules/stream |
 
 
+Required firmware
+================
+Release 1.3.x.
+
+
 Screen for Control System Studio
 ================================
 
