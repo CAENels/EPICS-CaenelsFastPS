@@ -256,6 +256,7 @@ record (stringin, "$(P)$(R)Version")
 record(mbbiDirect, "$(P)$(R)_EnableInit")
 {
     field(DESC, "Initialization for Enable")
+    field(DTYP, "stream")
     field(PINI, "YES")
     field(INP,  "@fastps.proto getStatusLSB L0")
     field(FLNK, "$(P)$(R)_EnableInitCalc")
