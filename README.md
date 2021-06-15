@@ -28,7 +28,6 @@ Required modules
 | calc | https://github.com/epics-modules/calc |
 | seq | http://www-csr.bessy.de/control/SoftDist/sequencer/Installation.html |
 | sscan | https://github.com/epics-modules/sscan |
-| stream | https://github.com/epics-modules/stream |
 
 
 Required firmware
